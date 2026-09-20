@@ -4,6 +4,36 @@ An interactive Pokémon-themed web application built with React,
 featuring a Game Boy Advance-inspired interface, trainer information, a
 Pokémon party, and a Pokédex powered by the PokéAPI.
 
+## Screenshots
+
+### Overworld
+
+**Desktop**
+
+<img src="/src/assets/screenshots/overworld-desktop.pngscreenshots/overworld-desktop.png" width="700">
+
+**Mobile**
+
+<img src="/src/assets/screenshots/overworld-mobile.png" width="300">
+
+### Trainer Card
+
+<img src="/src/screenshots/trainer-card.png" width="700">
+
+### Pokémon Party
+
+<img src="/src/screenshots/pokemon-party.png" width="700">
+
+### Pokédex
+
+**Desktop**
+
+<img src="/src/screenshots/pokedex-desktop.png" width="700">
+
+**Mobile**
+
+<img src="/src/screenshots/pokedex-mobile.png" width="300">
+
 ## Features
 
 -   Pokémon-inspired interactive overworld
