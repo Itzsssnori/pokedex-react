@@ -1,15 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import pokemon from "../data/pokemonData";
+import { playOpenSound, playCloseSound, playClickSound } from "../utils/sound";
 
 function PokemonModal({ onClose }) {
   const [selectedPokemon, setSelectedPokemon] = useState(pokemon[0]);
-
+  useEffect(() => {
+    playOpenSound();
+  }, []);
   return (
     <div className="pokemon-modal">
       <div className="pokemon-header">
         <h2>POKÉMON</h2>
 
-        <button className="pokedex-close" onClick={onClose}>
+        <button
+          className="pokemon-close"
+          onClick={() => {
+            playCloseSound();
+            onClose();
+          }}
+        >
           CLOSE
         </button>
       </div>
@@ -68,7 +77,10 @@ function PokemonModal({ onClose }) {
               className={`pokemon-entry ${
                 selectedPokemon.name === pokemon.name ? "selected" : ""
               }`}
-              onClick={() => setSelectedPokemon(pokemon)}
+              onClick={() => {
+                playClickSound();
+                setSelectedPokemon(pokemon);
+              }}
             >
               <img
                 src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/ruby-sapphire/${pokemon.id}.png`}

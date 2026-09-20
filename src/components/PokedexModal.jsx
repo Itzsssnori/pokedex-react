@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import { playOpenSound, playCloseSound, playClickSound } from "../utils/sound";
 function PokedexModal({ onClose }) {
   const [pokemonList, setPokemonList] = useState([]);
   const [search, setSearch] = useState("");
@@ -14,6 +14,9 @@ function PokedexModal({ onClose }) {
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(" ");
   }
+  useEffect(() => {
+    playOpenSound();
+  }, []);
   useEffect(() => {
     if (!loading) {
       return;
@@ -103,7 +106,13 @@ function PokedexModal({ onClose }) {
       <div className="pokedex-header">
         <h2>POKÉDEX</h2>
 
-        <button className="pokedex-close" onClick={onClose}>
+        <button
+          className="pokedex-close"
+          onClick={() => {
+            playCloseSound();
+            onClose();
+          }}
+        >
           CLOSE
         </button>
       </div>
@@ -129,7 +138,10 @@ function PokedexModal({ onClose }) {
         <div className="pokedex-search-row">
           <button
             className="pokedex-back"
-            onClick={() => setSelectedPokemon(null)}
+            onClick={() => {
+              playClickSound();
+              setSelectedPokemon(null);
+            }}
           >
             BACK
           </button>
@@ -148,12 +160,18 @@ function PokedexModal({ onClose }) {
               <div
                 className="pokedex-entry"
                 key={pokemon.name}
-                onClick={() => setSelectedPokemon(pokemon)}
+                onClick={() => {
+                  playClickSound();
+                  setSelectedPokemon(pokemon);
+                }}
               >
                 <div className="pokedex-entry-header">
-                  <span>#{String(pokemon.id).padStart(3, "0")}</span>
+                  <span>#{pokemon.id}</span>
 
-                  <span>{formatName(pokemon.name)}</span>
+                  <span className="pokedex-name">
+                    {pokemon.name}
+                    <span className="caught-ball" aria-label="Caught"></span>
+                  </span>
                 </div>
 
                 <div className="pokedex-entry-body">

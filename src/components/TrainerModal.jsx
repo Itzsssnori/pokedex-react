@@ -7,23 +7,28 @@ import soulBadge from "../assets/soul.png";
 import marshBadge from "../assets/marsh.png";
 import volcanoBadge from "../assets/volcano.png";
 import earthBadge from "../assets/earth.png";
-
+import { useEffect } from "react";
+import { playOpenSound, playCloseSound, playClickSound } from "../utils/sound";
 function TrainerModal({ onClose }) {
+  useEffect(() => {
+    playOpenSound();
+  }, []);
+
   return (
     <div className="trainer-modal">
-
-    <div className="trainer-header">
-
+      <div className="trainer-header">
         <h2>TRAINER CARD</h2>
 
         <button
-            className="trainer-close"
-            onClick={onClose}
+          className="trainer-close"
+          onClick={() => {
+            playCloseSound();
+            onClose();
+          }}
         >
-            CLOSE
+          CLOSE
         </button>
-
-    </div>
+      </div>
       <div className="trainer-info">
         <div className="trainer-avatar">
           <img src={trainerImage} alt="Trainer" />
@@ -50,76 +55,81 @@ function TrainerModal({ onClose }) {
         <p>"If I lose, I just have to train harder." — Cooltrainer Warren</p>
       </div>
 
-    
       <div className="trainer-badges">
+        <h3>BADGES EARNED:</h3>
 
-    <h3>BADGES EARNED:</h3>
-
-    <div className="badge-grid">
-
-        <div className="badge">
+        <div className="badge-grid">
+          <div className="badge">
             <img src={boulderBadge} alt="Boulder Badge" />
             <span>BOULDER</span>
-        </div>
+          </div>
 
-        <div className="badge">
+          <div className="badge">
             <img src={cascadeBadge} alt="Cascade Badge" />
             <span>CASCADE</span>
-        </div>
+          </div>
 
-        <div className="badge">
+          <div className="badge">
             <img src={thunderBadge} alt="Thunder Badge" />
             <span>THUNDER</span>
-        </div>
+          </div>
 
-        <div className="badge">
+          <div className="badge">
             <img src={rainbowBadge} alt="Rainbow Badge" />
             <span>RAINBOW</span>
-        </div>
+          </div>
 
-        <div className="badge">
+          <div className="badge">
             <img src={soulBadge} alt="Soul Badge" />
             <span>SOUL</span>
-        </div>
+          </div>
 
-        <div className="badge">
+          <div className="badge">
             <img src={marshBadge} alt="Marsh Badge" />
             <span>MARSH</span>
-        </div>
+          </div>
 
-        <div className="badge">
+          <div className="badge">
             <img src={volcanoBadge} alt="Volcano Badge" />
             <span>VOLCANO</span>
-        </div>
+          </div>
 
-        <div className="badge">
+          <div className="badge">
             <img src={earthBadge} alt="Earth Badge" />
             <span>EARTH</span>
+          </div>
         </div>
 
-    </div>
+        <div className="trainer-links">
+          <button
+            onClick={() =>
+              window.open("https://github.com/Itzsssnori", "_blank")
+            }
+          >
+            GITHUB
+          </button>
 
-      <div className="trainer-links">
-        <button onClick={() => window.open("https://github.com/Itzsssnori", "_blank")}>
-          GITHUB
-        </button>
+          <button
+            onClick={() =>
+              window.open(
+                "https://www.linkedin.com/in/norielle-john-buhawe-cs/",
+                "_blank",
+              )
+            }
+          >
+            LINKEDIN
+          </button>
 
-        <button onClick={() => window.open("https://www.linkedin.com/in/norielle-john-buhawe-cs/", "_blank")}>
-          LINKEDIN
-        </button>
-
-        <button onClick={() => (window.location.href = "mailto:buhawenoriellejohnd@gmail.com")}>
-          EMAIL
-        </button>
+          <button
+            onClick={() =>
+              (window.location.href = "mailto:buhawenoriellejohnd@gmail.com")
+            }
+          >
+            EMAIL
+          </button>
+        </div>
       </div>
-
-
-</div>
-           
-        
     </div>
-
-    
   );
 }
 

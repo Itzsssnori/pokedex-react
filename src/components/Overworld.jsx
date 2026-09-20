@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-
+import { playOpenSound, playCloseSound, playClickSound } from "../utils/sound";
 import overworldImage from "../assets/overworld.png";
 import trainerImage from "../assets/trainer.png";
 import overworldMusic from "../assets/audio/overworld.mp3";
@@ -48,8 +48,7 @@ function Overworld({ setActiveModal, activeModal }) {
 
   function startMusic() {
     if (audioRef.current) {
-      audioRef.current.play().catch(() => {
-      });
+      audioRef.current.play().catch(() => {});
     }
   }
 
@@ -62,52 +61,43 @@ function Overworld({ setActiveModal, activeModal }) {
 
     setIsTyping(false);
   }
-
   function nextDialogue() {
-    startMusic();
+    playClickSound();
 
     if (isTyping) {
       finishTyping();
-
       return;
     }
+
     if (dialogueFinished) {
       setDialogueIndex(0);
-
       setDialogueFinished(false);
-
       return;
     }
 
     if (dialogueIndex === dialogues.length - 1) {
       setDialogueFinished(true);
-
       return;
     }
 
     setDialogueIndex((currentIndex) => currentIndex + 1);
   }
-
   function previousDialogue() {
-    startMusic();
-
     if (isTyping) {
       finishTyping();
-
       return;
     }
 
     if (dialogueFinished) {
       setDialogueFinished(false);
-
       setDialogueIndex(dialogues.length - 1);
-
       return;
     }
 
     if (dialogueIndex === 0) {
       return;
     }
+
     setDialogueIndex((currentIndex) => currentIndex - 1);
   }
 
@@ -118,11 +108,9 @@ function Overworld({ setActiveModal, activeModal }) {
 
     if (audioRef.current.paused) {
       startMusic();
-
       setIsMusicPaused(false);
     } else {
       audioRef.current.pause();
-
       setIsMusicPaused(true);
     }
   }
@@ -211,7 +199,13 @@ function Overworld({ setActiveModal, activeModal }) {
       </button>
 
       {activeModal === "NONE" && (
-        <div className="dialogue-box" onClick={nextDialogue}>
+        <div
+          className="dialogue-box"
+          onClick={() => {
+            playClickSound();
+            nextDialogue();
+          }}
+        >
           <div className="dialogue-text">
             <div className="dialogue-speaker">NORI:</div>
 
@@ -231,6 +225,7 @@ function Overworld({ setActiveModal, activeModal }) {
       <button
         className="menu-button"
         onClick={() => {
+          playOpenSound();
           setActiveModal("START_MENU");
         }}
       >

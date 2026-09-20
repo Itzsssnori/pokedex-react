@@ -1,3 +1,4 @@
+import { playOpenSound, playCloseSound, playClickSound } from "../utils/sound";
 function StartMenu({ setActiveModal }) {
   return (
     <div className="start-menu">
