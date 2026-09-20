@@ -10,29 +10,29 @@ Pokémon party, and a Pokédex powered by the PokéAPI.
 
 **Desktop**
 
-<img src="/src/assets/screenshots/overworld-desktop.pngscreenshots/overworld-desktop.png" width="700">
+<img src="/src/assets/screenshots/overworld-desktop.png" width="600">
 
 **Mobile**
 
-<img src="/src/assets/screenshots/overworld-mobile.png" width="300">
+<img src="/src/assets/screenshots/overworld-mobile.png" width="220">
 
 ### Trainer Card
 
-<img src="/src/screenshots/trainer-card.png" width="700">
+<img src="/src/assets/screenshots/trainer-card.png" width="600">
 
 ### Pokémon Party
 
-<img src="/src/screenshots/pokemon-party.png" width="700">
+<img src="/src/assets/screenshots/pokemon-party.png" width="600">
 
 ### Pokédex
 
 **Desktop**
 
-<img src="/src/screenshots/pokedex-desktop.png" width="700">
+<img src="/src/assets/screenshots/pokedex-desktop.png" width="600">
 
 **Mobile**
 
-<img src="/src/screenshots/pokedex-mobile.png" width="300">
+<img src="/src/assets/screenshots/pokedex-mobile.png" width="220">
 
 ## Features
 
