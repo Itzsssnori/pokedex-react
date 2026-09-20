@@ -1,16 +1,125 @@
-# React + Vite
+# Pokémon React Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An interactive Pokémon-themed web application built with React,
+featuring a Game Boy Advance-inspired interface, trainer information, a
+Pokémon party, and a Pokédex powered by the PokéAPI.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+-   Pokémon-inspired interactive overworld
+-   Trainer profile and trainer card
+-   Pokémon party with selectable Pokémon
+-   Pokédex containing the first 151 Pokémon
+-   Pokémon search functionality
+-   Pokémon data retrieved from the PokéAPI
+-   Responsive desktop and mobile layouts
+-   Background music and interactive UI elements
+-   Game-inspired dialogue and menu navigation
 
-## React Compiler
+## Technologies
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+-   React
+-   JavaScript
+-   CSS
+-   Vite
+-   PokéAPI
+-   Netlify
 
-## Expanding the ESLint configuration
+## Project Structure
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+``` text
+src/
+├── assets/
+│   ├── images
+│   └── audio/
+├── components/
+│   ├── Overworld.jsx
+│   ├── PokedexModal.jsx
+│   ├── PokemonModal.jsx
+│   ├── StartMenu.jsx 
+│   └── TrainerModal.jsx 
+├── data/
+│   └── pokemonData.js
+├── App.jsx
+├── main.jsx
+└── index.css
+```
+
+## Main Components
+
+### Overworld
+
+The main interactive environment of the application. It contains the
+Pokémon-inspired background, trainer character, dialogue system, music
+controls, and menu navigation.
+
+### Start Menu
+
+Provides navigation to the main sections of the application:
+
+-   Pokédex
+-   Pokémon
+-   Trainer
+
+### Trainer
+
+Displays the trainer's profile information, including their name,
+academic information, trainer ID, motto, social links, and badges.
+
+### Pokémon
+
+Displays the trainer's six-Pokémon party. Users can select individual
+Pokémon to view their level, HP, gender, and type information.
+
+### Pokédex
+
+Retrieves Pokémon information from the PokéAPI and displays the first
+151 Pokémon. Users can search the Pokédex and view additional
+information about a selected Pokémon.
+
+## React Concepts Demonstrated
+
+This project was developed to practice several fundamental React and
+JavaScript concepts, including:
+
+-   React components
+-   Props
+-   `useState`
+-   `useEffect`
+-   Event handling
+-   Conditional rendering
+-   Array `.map()`
+-   Asynchronous API requests
+-   Dynamic rendering of API data
+-   Responsive CSS layouts
+
+## API
+
+Pokémon data is provided by [PokéAPI](https://pokeapi.co/).
+
+The project retrieves information from the API and dynamically renders
+Pokémon data within the Pokédex interface.
+
+## Purpose
+
+This project was created as an academic React project for Web Development to practice
+building an interactive web application using component-based
+development, state management, API integration, event handling, and
+responsive design.
+
+The visual interface is inspired by the Pokémon games of the Game Boy
+Advance era while using original project content and implementation.
+
+## Deployment
+
+The application is deployed using Netlify.
+
+## Author
+
+**Norielle John D. Buhawe**
+
+BS Computer Science Student
+
+------------------------------------------------------------------------
+
+*This project was created for academic purposes.*
