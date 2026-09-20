@@ -62,6 +62,7 @@ function Overworld({ setActiveModal, activeModal }) {
     setIsTyping(false);
   }
   function nextDialogue() {
+      startMusic();
     playClickSound();
 
     if (isTyping) {
