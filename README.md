@@ -112,6 +112,11 @@ Retrieves Pokémon information from the PokéAPI and displays the first
 151 Pokémon. Users can search the Pokédex and view additional
 information about a selected Pokémon.
 
+### Battle
+
+Provides a prototype Pokémon battle experience inspired by the battle
+interfaces of the Game Boy Advance Pokémon games.
+
 ## React Concepts Demonstrated
 
 This project was developed to practice several fundamental React and
@@ -121,6 +126,7 @@ JavaScript concepts, including:
 -   Props
 -   `useState`
 -   `useEffect`
+-   `useRef`
 -   Event handling
 -   Conditional rendering
 -   Array `.map()`
