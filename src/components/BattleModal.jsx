@@ -22,6 +22,12 @@ function BattleModal({ onClose }) {
   const [battleStage, setBattleStage] = useState("SELECT");
 
   const [battleAction, setBattleAction] = useState("MENU");
+  const [selectedMove, setSelectedMove] = useState(null);
+  const [selectedMoveData, setSelectedMoveData] = useState(null);
+  const [opponentHP, setOpponentHP] = useState(100);
+  const [isAttacking, setIsAttacking] = useState(false);
+  const [damageDealt, setDamageDealt] = useState(0);
+  
 
   useEffect(() => {
     async function fetchPokemon() {
@@ -49,37 +55,56 @@ function BattleModal({ onClose }) {
 
     fetchPokemon();
   }, []);
-
-  function chooseOpponent(pokemon) {
+const chooseOpponent = (pokemon) => {
     setSelectedPokemon(pokemon);
+    setOpponentHP(100);
+    setPlayerPokemon(null);
+    setSelectedMove(null);
+    setSelectedMoveData(null);
+    setBattleAction("MENU");
+    setDamageDealt(0);
+    setIsAttacking(false);
+
     setBattleStage("PLAYER_SELECT");
-  }
+};
 
-  async function choosePlayerPokemon(partyPokemon) {
+const choosePlayerPokemon = async (partyPokemon) => {
     try {
-      const response = await fetch(
-        `https://pokeapi.co/api/v2/pokemon/${partyPokemon.id}`,
-      );
+        const response = await fetch(
+            `https://pokeapi.co/api/v2/pokemon/${partyPokemon.id}`
+        );
 
-      const data = await response.json();
+        const data = await response.json();
 
-      setPlayerPokemon({
-        ...data,
-        level: partyPokemon.level,
-      });
+        setPlayerPokemon({
+            ...data,
+            level: partyPokemon.level,
+        });
 
-      setBattleStage("BATTLE");
+        // Fresh battle state
+        setOpponentHP(100);
+        setSelectedMove(null);
+        setSelectedMoveData(null);
+        setBattleAction("MENU");
+        setDamageDealt(0);
+        setIsAttacking(false);
+
+        setBattleStage("BATTLE");
     } catch (error) {
-      console.error("Failed to load player Pokémon:", error);
+        console.error("Failed to load player Pokémon:", error);
     }
-  }
-
-  function backToSelection() {
+};
+ const backToSelection = () => {
     setSelectedPokemon(null);
     setPlayerPokemon(null);
     setBattleStage("SELECT");
-  }
-
+    setBattleAction("MENU");
+    setSelectedMove(null);
+    setSelectedMoveData(null);
+    setOpponentHP(100);
+    setIsAttacking(false);
+    setDamageDealt(0);
+};
   return (
     <div className="battle-modal">
       <div className="battle-header">
@@ -193,7 +218,10 @@ function BattleModal({ onClose }) {
                   <span>HP</span>
 
                   <div className="hp-bar">
-                    <div className="hp-fill"></div>
+                    <div
+                      className="hp-fill"
+                      style={{ width: `${opponentHP}%` }}
+                    ></div>
                   </div>
                 </div>
               </div>
@@ -201,7 +229,9 @@ function BattleModal({ onClose }) {
               <img
                 src={selectedPokemon.sprites.front_default}
                 alt={selectedPokemon.name}
-                className="battle-opponent-sprite"
+                className={`battle-opponent-sprite ${
+    isAttacking ? "pokemon-hit" : ""
+} ${opponentHP === 0 ? "pokemon-fainted" : ""}`}
               />
 
               <img
@@ -236,7 +266,7 @@ function BattleModal({ onClose }) {
                     className="battle-fight-button"
                     onClick={() => setBattleAction("FIGHT")}
                   >
-                    FIGHT
+                    FIGHT [DEMO]
                   </button>
                 </div>
               )}
@@ -244,28 +274,146 @@ function BattleModal({ onClose }) {
               {battleAction === "FIGHT" && (
                 <div className="battle-command-box">
                   <div className="battle-move-list">
-                    <button className="battle-move-button">MOVE 1</button>
+                    {playerPokemon.moves.slice(0, 4).map((move, index) => (
+                      <button
+                        key={move.move.name}
+                        className={`battle-move-button ${
+                          selectedMove === move.move.name ? "selected" : ""
+                        }`}
+                        onClick={async () => {
+                          try {
+                            // Clicking the already-selected move uses it
+                            if (selectedMove === move.move.name) {
+                              setBattleAction("ATTACK");
+                              return;
+                            }
 
-                    <button className="battle-move-button">MOVE 2</button>
+                            const response = await fetch(move.move.url);
+                            const data = await response.json();
 
-                    <button className="battle-move-button">MOVE 3</button>
-
-                    <button className="battle-move-button">MOVE 4</button>
+                            setSelectedMove(move.move.name);
+                            setSelectedMoveData(data);
+                          } catch (error) {
+                            console.error("Failed to load move:", error);
+                          }
+                        }}
+                      >
+                        {move.move.name.replace("-", " ").toUpperCase()}
+                      </button>
+                    ))}
                   </div>
 
                   <div className="battle-move-info">
-                    <div className="move-info-row">
-                      <span>PP</span>
-                      <strong>15/15</strong>
-                    </div>
+                    {selectedMoveData ? (
+                      <>
+                        <div className="move-info-row">
+                          <span>PP</span>
+                          <strong>
+                            {selectedMoveData.pp}/{selectedMoveData.pp}
+                          </strong>
+                        </div>
 
-                    <div className="move-info-row">
-                      <span>TYPE</span>
-                      <strong>ELECTRIC</strong>
-                    </div>
+                        <div className="move-info-row">
+                          <span>TYPE</span>
+                          <strong>
+                            {selectedMoveData.type.name.toUpperCase()}
+                          </strong>
+                        </div>
+                      </>
+                    ) : (
+                      <div className="move-info-placeholder">SELECT A MOVE</div>
+                    )}
+                    {selectedMoveData && (
+                      <div className="move-select-hint">
+                        SELECT AGAIN TO USE
+                      </div>
+                    )}
                   </div>
                 </div>
               )}
+
+             {battleAction === "ATTACK" && selectedMove && (
+    <div className="battle-command-box battle-attack-box">
+        <div className="battle-message">
+            {playerPokemon.name.toUpperCase()} used{" "}
+            {selectedMove.replace("-", " ").toUpperCase()}!
+        </div>
+
+        <button
+            className="battle-continue-button"
+            onClick={() => {
+                setIsAttacking(true);
+
+                const damage = Math.max(
+                    10,
+                    Math.round((selectedMoveData?.power || 40) / 2)
+                );
+
+                setDamageDealt(damage);
+
+                setTimeout(() => {
+                    setOpponentHP((currentHP) => {
+                        const remainingHP = Math.max(currentHP - damage, 0);
+
+                        if (remainingHP === 0) {
+                            setBattleAction("DEFEAT");
+                        } else {
+                            setBattleAction("RESULT");
+                        }
+
+                        return remainingHP;
+                    });
+
+                    setIsAttacking(false);
+                }, 500);
+            }}
+        >
+            NEXT
+        </button>
+    </div>
+)}
+{battleAction === "DEFEAT" && (
+    <div className="battle-command-box battle-attack-box">
+        <div className="battle-message">
+            The wild {selectedPokemon.name.toUpperCase()} fainted!
+        </div>
+
+        <button
+            className="battle-continue-button"
+            onClick={backToSelection}
+        >
+            END DEMO
+        </button>
+    </div>
+)}
+
+              {battleAction === "RESULT" && selectedMove && (
+    <div className="battle-command-box battle-attack-box">
+        <div className="battle-message">
+            What would you like to do next?
+        </div>
+
+        <div className="battle-result-buttons">
+            <button
+                className="battle-continue-button"
+                onClick={() => {
+                    setBattleAction("MENU");
+                    setSelectedMove(null);
+                    setSelectedMoveData(null);
+                }}
+            >
+                CONTINUE
+            </button>
+
+            <button
+                className="battle-continue-button"
+                onClick={backToSelection}
+            >
+                END DEMO
+            </button>
+        </div>
+    </div>
+)}
             </div>
           )}
       </div>

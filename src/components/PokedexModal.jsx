@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { playOpenSound, playCloseSound, playClickSound } from "../utils/sound";
+import pokedexLoadingBg from "../assets/pokedexLoadingBg.png";
 function PokedexModal({ onClose }) {
   const [pokemonList, setPokemonList] = useState([]);
   const [search, setSearch] = useState("");
@@ -116,13 +117,21 @@ function PokedexModal({ onClose }) {
           CLOSE
         </button>
       </div>
-      {loading && (
-        <div className="pokedex-loading">
-          <div className="loading-pokeball"></div>
-
-          <p>LOADING POKÉDEX{loadingDots}</p>
+      <div className="pokedex-content">
+        {loading && (
+    <div
+        className="pokedex-loading"
+        style={{
+            backgroundImage: `url(${pokedexLoadingBg})`,
+        }}
+    >
+        <div className="loading-pokeball">
+            <div className="loading-pokeball-button"></div>
         </div>
-      )}
+
+        <p>LOADING POKÉDEX{loadingDots}</p>
+    </div>
+)}
 
       {selectedPokemon === null ? (
         <div className="pokedex-search-row">
@@ -259,7 +268,7 @@ function PokedexModal({ onClose }) {
 
           <p className="pokedex-description">{description}</p>
         </div>
-      )}
+      )} </div>
     </div>
   );
 }
