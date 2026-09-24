@@ -34,6 +34,11 @@ Pokémon party, and a Pokédex powered by the PokéAPI.
 
 <img src="/src/assets/screenshots/pokedex-mobile.png" width="220">
 
+### Battle
+
+<img src="/src/assets/screenshots/battle.png" width="600">
+
+
 ## Features
 
 -   Pokémon-inspired interactive overworld
