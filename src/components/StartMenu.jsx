@@ -8,6 +8,15 @@ function StartMenu({ setActiveModal }) {
 
       <button onClick={() => setActiveModal("POKEMON")}>POKEMON</button>
 
+      <button
+        onClick={() => {
+          playClickSound();
+          setActiveModal("BATTLE");
+        }}
+      >
+        BATTLE
+      </button>
+
       <button onClick={() => setActiveModal("TRAINER")}>TRAINER</button>
 
       <button onClick={() => setActiveModal("NONE")}>EXIT</button>

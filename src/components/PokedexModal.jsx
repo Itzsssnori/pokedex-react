@@ -35,7 +35,7 @@ function PokedexModal({ onClose }) {
     return () => clearInterval(interval);
   }, [loading]);
   useEffect(() => {
-    fetch("https://pokeapi.co/api/v2/pokemon?limit=151")
+    fetch("https://pokeapi.co/api/v2/pokemon?limit=386")
       .then((response) => response.json())
 
       .then((data) => {

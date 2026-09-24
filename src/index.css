@@ -2224,3 +2224,832 @@ body {
     overflow: hidden;
   }
 }
+
+.battle-loading {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 18px;
+
+  z-index: 10;
+
+  color: #ffffff;
+
+  font-family: "Press Start 2P", monospace;
+  font-size: 14px;
+
+  text-align: center;
+}
+
+.loading-pokeball {
+  position: relative;
+
+  width: 90px;
+  height: 90px;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      to bottom,
+      #e53935 0%,
+      #e53935 45%,
+      #202b35 45%,
+      #202b35 55%,
+      #f4f4dc 55%,
+      #f4f4dc 100%
+    );
+
+  border: 5px solid #102638;
+
+  box-shadow:
+    0 0 0 3px #d4e9d8,
+    2px 2px 0 #102638;
+
+  animation: pokeball-spin 1.4s linear infinite;
+}
+
+.loading-pokeball-button {
+  position: absolute;
+
+  width: 26px;
+  height: 26px;
+
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  background: #f4f4dc;
+
+  border: 5px solid #102638;
+
+  border-radius: 50%;
+
+  box-sizing: border-box;
+}
+
+@keyframes pokeball-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.battle-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 30;
+
+  width: min(900px, 92vw);
+  height: min(700px, 90vh);
+
+  padding: 14px;
+
+  background: #1d4f7a;
+  border: 6px solid #182c3d;
+
+  box-shadow:
+    inset 0 0 0 3px #6fa8cf,
+    inset 0 0 0 7px #315f82,
+    8px 8px 0 #111820;
+
+  color: #f4f4dc;
+  font-family: "Press Start 2P", monospace;
+
+  box-sizing: border-box;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.battle-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 8px 10px;
+
+  background: #123653;
+  border: 4px solid #0d1f2e;
+
+  box-shadow:
+    inset 0 0 0 2px #4e89b3;
+
+  color: #ffffff;
+}
+
+
+.battle-close {
+  margin-left: auto;
+  flex-shrink: 0;
+  display: block;
+  padding: 10px 32px;
+
+  font-family: "Press Start 2P", monospace;
+  font-size: 8px;
+
+  color: #f4f4dc;
+  background: #315f82;
+  border: 3px solid #102638;
+
+  box-shadow: inset 0 0 0 2px #6fa8cf;
+
+  cursor: pointer;
+}
+
+.battle-close:hover {
+  background: #4279a0;
+}
+
+.battle-close:active {
+  transform: translateY(2px);
+}
+.battle-screen {
+  position: relative;
+
+  flex: 1;
+  min-height: 0;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  border: 5px solid #102638;
+
+  overflow: hidden;
+}
+.battle-selection-content {
+    position: relative;
+    z-index: 2;
+}
+
+.battle-opponent {
+  position: relative;
+  width: 100%;
+  height: 45%;
+}.battle-opponent-info {
+    position: absolute;
+
+    top: 30px;
+    left: 24px;
+
+    width: 300px;
+
+    padding: 10px 14px;
+
+    background: #f4f4dc;
+    border: 4px solid #202020;
+
+    box-shadow: 4px 4px 0 #303030;
+
+    color: #202020;
+
+    z-index: 15;
+    box-sizing: border-box;
+}
+
+
+.battle-opponent-info .battle-name-level {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    box-sizing: border-box;
+
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 1.2;
+
+    white-space: nowrap;
+}
+
+.battle-opponent-info .battle-name-level span:first-child {
+    flex: 1;
+}
+
+.battle-opponent-info .battle-name-level span:last-child {
+    margin-left: auto;
+    padding-left: 20px;
+}
+
+.battle-player-info .battle-name-level {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 8px;
+  
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.battle-info {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+ 
+  min-width: 220px;
+  padding: 10px;
+
+  background: #f4f4dc;
+  border: 4px solid #102638;
+
+  color: #102638;
+  font-size: 9px;
+}
+
+.battle-hp {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    font-size: 11px;
+}
+
+.battle-hp > span {
+    font-size: 10px;
+}
+
+.hp-bar {
+    flex: 1;
+
+    height: 12px;
+
+    padding: 2px;
+
+    background: #303030;
+    border: 2px solid #202020;
+}
+
+.hp-fill {
+    width: 100%;
+    height: 100%;
+
+    background: #54a83d;
+
+    transition: width 0.3s ease;
+}
+
+
+.battle-opponent-sprite {
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+}
+
+.battle-player-sprite {
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+}.battle-message {
+    position: absolute;
+
+    left: 20px;
+    right: 20px;
+    bottom: 18px;
+
+    min-height: 54px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 10px 18px;
+
+    background: #f4f4dc;
+    border: 4px solid #202020;
+    box-shadow: 4px 4px 0 #303030;
+
+    color: #202020;
+    font-size: 13px;
+    line-height: 1.5;
+
+    z-index: 20;
+    box-sizing: border-box;
+}
+.battle-selection {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.battle-selection h3 {
+    margin: 8px 0 14px;
+    text-align: center;
+    font-size: 13px;
+    color: #102638;
+    
+}
+
+.battle-pokemon-list {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 7px;
+}
+
+.battle-pokemon-scroll {
+    width: 94%;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 4px 10px 10px;
+    box-sizing: border-box;
+}
+.battle-pokemon-scroll::-webkit-scrollbar {
+  width: 10px;
+}
+
+.battle-pokemon-scroll::-webkit-scrollbar-track {
+  background: #102638;
+  border: 2px solid #315f82;
+}
+
+.battle-pokemon-scroll::-webkit-scrollbar-thumb {
+  background: #e8e4c5;
+  border: 2px solid #102638;
+}
+
+.battle-pokemon-scroll::-webkit-scrollbar-thumb:hover {
+  background: #ffffff;
+}
+
+.battle-pokemon-entry {
+    min-width: 0;
+    height: 68px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background: #f4f1d8;
+    border: 3px solid #182c3d;
+
+    font-family: "Press Start 2P", monospace;
+    color: #102638;
+
+    cursor: pointer;
+    box-sizing: border-box;
+}
+.battle-pokemon-entry img {
+    width: 52px;
+    height: 52px;
+    image-rendering: pixelated;
+    object-fit: contain;
+}
+
+.battle-pokemon-entry span {
+    font-size: 7px;
+    text-align: center;
+    line-height: 1.4;
+}
+
+.battle-pokemon-entry:hover {
+    background: #ffffff;
+}
+
+.battle-pokemon-entry:active {
+    transform: translateY(2px);
+}
+.battle-preview {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.battle-preview h3 {
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.battle-preview-sprite {
+  width: 180px;
+  height: 180px;
+
+  image-rendering: pixelated;
+  object-fit: contain;
+}
+
+.battle-back-button,
+.battle-start-button {
+  padding: 10px 20px;
+  margin: 8px;
+
+  font-family: "Press Start 2P", monospace;
+  font-size: 8px;
+
+  color: #f4f4dc;
+  background: #315f82;
+  border: 3px solid #102638;
+
+  box-shadow: inset 0 0 0 2px #6fa8cf;
+
+  cursor: pointer;
+}
+
+.battle-back-button:hover,
+.battle-start-button:hover {
+  background: #4279a0;
+}
+
+.battle-back-button:active,
+.battle-start-button:active {
+  transform: translateY(2px);
+}
+
+.battle-arena {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    overflow: hidden;
+    image-rendering: pixelated;
+}.battle-player-info {
+    position: absolute;
+    right: 24px;
+    bottom: 155px !important;
+
+    width: 300px;
+    padding: 10px 14px;
+
+    background: #f4f4dc;
+    border: 4px solid #202020;
+    box-shadow: 4px 4px 0 #303030;
+
+    color: #202020;
+    z-index: 15;
+    box-sizing: border-box;
+}
+
+.battle-opponent-sprite {
+  position: absolute;
+
+  width: 220px;
+  height: 220px;
+
+  object-fit: contain;
+
+  image-rendering: pixelated;
+
+  top: 100px;
+  right: 24%;
+}
+
+
+.battle-player-sprite {
+    position: absolute;
+
+    width: 230px;
+    height: 230px;
+
+    object-fit: contain;
+    image-rendering: pixelated;
+
+    bottom: 115px;
+    left: 20%;
+
+    z-index: 5;
+}
+
+.battle-player-selection {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.battle-player-selection h3 {
+    margin: 8px 0 4px;
+
+    font-size: 16px;
+    text-align: center;
+
+    color: #102638;
+}
+
+.battle-selected-opponent {
+    margin: 0 0 14px;
+
+    font-size: 9px;
+    text-align: center;
+
+    color: #183d56;
+}
+
+.battle-party-list {
+    width: 94%;
+    flex: 1;
+    min-height: 0;
+
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 8px;
+    padding: 4px;
+
+    box-sizing: border-box;
+}
+.battle-party-entry {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background: #f4f1d8;
+    border: 3px solid #182c3d;
+
+    font-family: "Press Start 2P", monospace;
+    color: #102638;
+
+    cursor: pointer;
+}
+.battle-party-entry img {
+    width: 130px;
+    height: 130px;
+
+    object-fit: contain;
+    image-rendering: pixelated;
+
+    margin-bottom: 8px;
+}
+
+.battle-party-entry span {
+    font-size: 11px;
+    text-align: center;
+    line-height: 1.5;
+}
+
+.battle-party-entry small {
+    margin-top: 8px;
+
+    font-size: 9px;
+    color: #183d56;
+}
+
+.battle-party-entry:hover {
+    background: #ffffff;
+}
+
+.battle-party-entry:active {
+    transform: translateY(2px);
+}
+
+.battle-party-entry:active {
+    transform: translateY(2px);
+}
+.battle-party-entry:hover {
+  background: #ffffff;
+}
+
+.battle-party-entry:active {
+  transform: translateY(2px);
+}
+
+.battle-actions {
+    position: absolute;
+
+    right: 20px;
+    bottom: 18px;
+
+    width: 300px;
+    height: 100px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+
+    padding: 6px;
+
+    background: #f4f4dc;
+    border: 4px solid #202020;
+
+    box-shadow: 4px 4px 0 #303030;
+
+    box-sizing: border-box;
+
+    z-index: 25;
+}
+
+.battle-actions button {
+    font-family: "Press Start 2P", monospace;
+    font-size: 9px;
+
+    color: #202020;
+    background: #e8e4c5;
+
+    border: 3px solid #303030;
+
+    cursor: pointer;
+}
+
+.battle-actions button:hover {
+    background: #ffffff;
+}
+
+.battle-actions button:active {
+    transform: translateY(2px);
+}.battle-command-box {
+    position: absolute;
+
+    left: 20px;
+    right: 20px;
+    bottom: 18px;
+
+    height: 112px;
+
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+
+    background: #f4f4dc;
+
+    border: 5px solid #202020;
+
+    box-shadow:
+        inset 0 0 0 3px #ffffff,
+        inset 0 0 0 6px #a8a88c,
+        5px 5px 0 #303030;
+
+    box-sizing: border-box;
+
+    z-index: 25;
+}
+.battle-intro-box {
+    grid-template-columns: 2fr 1fr;
+}
+
+.battle-intro-box .battle-message {
+    position: static;
+
+    display: flex;
+    align-items: center;
+
+    min-height: 0;
+
+    padding: 16px 22px;
+
+    background: transparent;
+
+    border: none;
+    box-shadow: none;
+
+    color: #202020;
+
+    font-family: "Press Start 2P", monospace;
+    font-size: 11px;
+
+    line-height: 1.7;
+
+    box-sizing: border-box;
+}
+.battle-fight-button {
+    margin: 7px;
+
+    font-family: "Press Start 2P", monospace;
+    font-size: 12px;
+
+    color: #202020;
+    background: #e8e4c5;
+
+    border: 4px solid #303030;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+}
+
+.battle-fight-button:hover {
+    background: #ffffff;
+}
+
+.battle-fight-button:active {
+    transform: translateY(2px);
+}
+
+.battle-move-list {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 5px;
+
+    padding: 8px;
+
+    border-right: 4px solid #202020;
+
+    box-sizing: border-box;
+}
+
+.battle-move-button {
+    font-family: "Press Start 2P", monospace;
+    font-size: 9px;
+
+    color: #202020;
+
+    background: #ffffff;
+
+    border: 3px solid #303030;
+
+    box-shadow:
+        inset 0 0 0 2px #e5e5e5;
+
+    cursor: pointer;
+
+    transition:
+        background 0.08s ease,
+        transform 0.08s ease;
+}
+
+.battle-move-button:hover {
+    background: #f2f2f2;
+}
+
+.battle-move-button:active {
+    transform: translateY(2px);
+}
+.battle-move-info {
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    gap: 20px;
+
+    padding: 12px 18px;
+
+    font-family: "Press Start 2P", monospace;
+
+    color: #202020;
+
+    box-sizing: border-box;
+}
+
+.move-info-row {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+}
+
+
+.battle-move-info > div {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 12px;
+}
+
+.move-info-row span {
+    font-size: 8px;
+}
+
+.move-info-row strong {
+    font-size: 9px;
+
+    text-align: right;
+}
