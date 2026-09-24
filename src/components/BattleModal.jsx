@@ -27,7 +27,6 @@ function BattleModal({ onClose }) {
   const [opponentHP, setOpponentHP] = useState(100);
   const [isAttacking, setIsAttacking] = useState(false);
   const [damageDealt, setDamageDealt] = useState(0);
-  
 
   useEffect(() => {
     async function fetchPokemon() {
@@ -55,7 +54,7 @@ function BattleModal({ onClose }) {
 
     fetchPokemon();
   }, []);
-const chooseOpponent = (pokemon) => {
+  const chooseOpponent = (pokemon) => {
     setSelectedPokemon(pokemon);
     setOpponentHP(100);
     setPlayerPokemon(null);
@@ -66,35 +65,35 @@ const chooseOpponent = (pokemon) => {
     setIsAttacking(false);
 
     setBattleStage("PLAYER_SELECT");
-};
+  };
 
-const choosePlayerPokemon = async (partyPokemon) => {
+  const choosePlayerPokemon = async (partyPokemon) => {
     try {
-        const response = await fetch(
-            `https://pokeapi.co/api/v2/pokemon/${partyPokemon.id}`
-        );
+      const response = await fetch(
+        `https://pokeapi.co/api/v2/pokemon/${partyPokemon.id}`,
+      );
 
-        const data = await response.json();
+      const data = await response.json();
 
-        setPlayerPokemon({
-            ...data,
-            level: partyPokemon.level,
-        });
+      setPlayerPokemon({
+        ...data,
+        level: partyPokemon.level,
+      });
 
-        // Fresh battle state
-        setOpponentHP(100);
-        setSelectedMove(null);
-        setSelectedMoveData(null);
-        setBattleAction("MENU");
-        setDamageDealt(0);
-        setIsAttacking(false);
+      // Fresh battle state
+      setOpponentHP(100);
+      setSelectedMove(null);
+      setSelectedMoveData(null);
+      setBattleAction("MENU");
+      setDamageDealt(0);
+      setIsAttacking(false);
 
-        setBattleStage("BATTLE");
+      setBattleStage("BATTLE");
     } catch (error) {
-        console.error("Failed to load player Pokémon:", error);
+      console.error("Failed to load player Pokémon:", error);
     }
-};
- const backToSelection = () => {
+  };
+  const backToSelection = () => {
     setSelectedPokemon(null);
     setPlayerPokemon(null);
     setBattleStage("SELECT");
@@ -104,7 +103,7 @@ const choosePlayerPokemon = async (partyPokemon) => {
     setOpponentHP(100);
     setIsAttacking(false);
     setDamageDealt(0);
-};
+  };
   return (
     <div className="battle-modal">
       <div className="battle-header">
@@ -230,8 +229,8 @@ const choosePlayerPokemon = async (partyPokemon) => {
                 src={selectedPokemon.sprites.front_default}
                 alt={selectedPokemon.name}
                 className={`battle-opponent-sprite ${
-    isAttacking ? "pokemon-hit" : ""
-} ${opponentHP === 0 ? "pokemon-fainted" : ""}`}
+                  isAttacking ? "pokemon-hit" : ""
+                } ${opponentHP === 0 ? "pokemon-fainted" : ""}`}
               />
 
               <img
@@ -332,88 +331,88 @@ const choosePlayerPokemon = async (partyPokemon) => {
                 </div>
               )}
 
-             {battleAction === "ATTACK" && selectedMove && (
-    <div className="battle-command-box battle-attack-box">
-        <div className="battle-message">
-            {playerPokemon.name.toUpperCase()} used{" "}
-            {selectedMove.replace("-", " ").toUpperCase()}!
-        </div>
+              {battleAction === "ATTACK" && selectedMove && (
+                <div className="battle-command-box battle-attack-box">
+                  <div className="battle-message">
+                    {playerPokemon.name.toUpperCase()} used{" "}
+                    {selectedMove.replace("-", " ").toUpperCase()}!
+                  </div>
 
-        <button
-            className="battle-continue-button"
-            onClick={() => {
-                setIsAttacking(true);
+                  <button
+                    className="battle-continue-button"
+                    onClick={() => {
+                      setIsAttacking(true);
 
-                const damage = Math.max(
-                    10,
-                    Math.round((selectedMoveData?.power || 40) / 2)
-                );
+                      const damage = Math.max(
+                        10,
+                        Math.round((selectedMoveData?.power || 40) / 2),
+                      );
 
-                setDamageDealt(damage);
+                      setDamageDealt(damage);
 
-                setTimeout(() => {
-                    setOpponentHP((currentHP) => {
-                        const remainingHP = Math.max(currentHP - damage, 0);
+                      setTimeout(() => {
+                        setOpponentHP((currentHP) => {
+                          const remainingHP = Math.max(currentHP - damage, 0);
 
-                        if (remainingHP === 0) {
+                          if (remainingHP === 0) {
                             setBattleAction("DEFEAT");
-                        } else {
+                          } else {
                             setBattleAction("RESULT");
-                        }
+                          }
 
-                        return remainingHP;
-                    });
+                          return remainingHP;
+                        });
 
-                    setIsAttacking(false);
-                }, 500);
-            }}
-        >
-            NEXT
-        </button>
-    </div>
-)}
-{battleAction === "DEFEAT" && (
-    <div className="battle-command-box battle-attack-box">
-        <div className="battle-message">
-            The wild {selectedPokemon.name.toUpperCase()} fainted!
-        </div>
+                        setIsAttacking(false);
+                      }, 500);
+                    }}
+                  >
+                    NEXT
+                  </button>
+                </div>
+              )}
+              {battleAction === "DEFEAT" && (
+                <div className="battle-command-box battle-attack-box">
+                  <div className="battle-message">
+                    The wild {selectedPokemon.name.toUpperCase()} fainted!
+                  </div>
 
-        <button
-            className="battle-continue-button"
-            onClick={backToSelection}
-        >
-            END DEMO
-        </button>
-    </div>
-)}
+                  <button
+                    className="battle-continue-button"
+                    onClick={backToSelection}
+                  >
+                    END DEMO
+                  </button>
+                </div>
+              )}
 
               {battleAction === "RESULT" && selectedMove && (
-    <div className="battle-command-box battle-attack-box">
-        <div className="battle-message">
-            What would you like to do next?
-        </div>
+                <div className="battle-command-box battle-attack-box">
+                  <div className="battle-message">
+                    What would you like to do next?
+                  </div>
 
-        <div className="battle-result-buttons">
-            <button
-                className="battle-continue-button"
-                onClick={() => {
-                    setBattleAction("MENU");
-                    setSelectedMove(null);
-                    setSelectedMoveData(null);
-                }}
-            >
-                CONTINUE
-            </button>
+                  <div className="battle-result-buttons">
+                    <button
+                      className="battle-continue-button"
+                      onClick={() => {
+                        setBattleAction("MENU");
+                        setSelectedMove(null);
+                        setSelectedMoveData(null);
+                      }}
+                    >
+                      CONTINUE
+                    </button>
 
-            <button
-                className="battle-continue-button"
-                onClick={backToSelection}
-            >
-                END DEMO
-            </button>
-        </div>
-    </div>
-)}
+                    <button
+                      className="battle-continue-button"
+                      onClick={backToSelection}
+                    >
+                      END DEMO
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           )}
       </div>

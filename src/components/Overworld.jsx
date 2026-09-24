@@ -5,7 +5,6 @@ import trainerImage from "../assets/trainer.png";
 import overworldMusic from "../assets/audio/overworld.mp3";
 
 const dialogues = [
-
   "HI THERE!",
 
   "WELCOME TO MY POKÉMON COLLECTION. I'VE BEEN WORKING ON THIS FOR A WHILE, SO I FIGURED IT WAS TIME TO LET SOMEONE ELSE SEE IT.",
@@ -37,7 +36,6 @@ const dialogues = [
   "THIS IS ONLY THE BEGINNING OF MY JOURNEY.",
 
   "WHEN YOU'RE READY, OPEN THE MENU. THERE'S STILL PLENTY MORE TO DISCOVER.",
-
 ];
 function Overworld({ setActiveModal, activeModal }) {
   const [dialogueIndex, setDialogueIndex] = useState(0);
@@ -190,34 +188,34 @@ function Overworld({ setActiveModal, activeModal }) {
           alt="Eevee"
         />
         <img
-    className="overworld-venusaur"
-    src="https://img.pokemondb.net/sprites/black-white/anim/back-normal/venusaur-f.gif"
-    alt="Venusaur"
-/>
+          className="overworld-venusaur"
+          src="https://img.pokemondb.net/sprites/black-white/anim/back-normal/venusaur-f.gif"
+          alt="Venusaur"
+        />
 
-<img
-    className="overworld-poliwrath"
-    src="https://img.pokemondb.net/sprites/black-white/anim/normal/poliwrath.gif"
-    alt="Poliwrath"
-/>
+        <img
+          className="overworld-poliwrath"
+          src="https://img.pokemondb.net/sprites/black-white/anim/normal/poliwrath.gif"
+          alt="Poliwrath"
+        />
 
-<img
-    className="overworld-snorlax"
-    src="https://img.pokemondb.net/sprites/black-white/anim/normal/snorlax.gif"
-    alt="Snorlax"
-/>
+        <img
+          className="overworld-snorlax"
+          src="https://img.pokemondb.net/sprites/black-white/anim/normal/snorlax.gif"
+          alt="Snorlax"
+        />
 
-<img
-    className="overworld-pikachu"
-    src="https://img.pokemondb.net/sprites/black-white/anim/normal/pikachu.gif"
-    alt="Pikachu"
-/>
+        <img
+          className="overworld-pikachu"
+          src="https://img.pokemondb.net/sprites/black-white/anim/normal/pikachu.gif"
+          alt="Pikachu"
+        />
 
-<img
-    className="overworld-aerodactyl"
-    src="https://img.pokemondb.net/sprites/black-white/anim/normal/aerodactyl.gif"
-    alt="Aerodactyl"
-/>
+        <img
+          className="overworld-aerodactyl"
+          src="https://img.pokemondb.net/sprites/black-white/anim/normal/aerodactyl.gif"
+          alt="Aerodactyl"
+        />
 
         <div className="trainer-name">
           <span>NORI</span>

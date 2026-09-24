@@ -119,156 +119,158 @@ function PokedexModal({ onClose }) {
       </div>
       <div className="pokedex-content">
         {loading && (
-    <div
-        className="pokedex-loading"
-        style={{
-            backgroundImage: `url(${pokedexLoadingBg})`,
-        }}
-    >
-        <div className="loading-pokeball">
-            <div className="loading-pokeball-button"></div>
-        </div>
-
-        <p>LOADING POKÉDEX{loadingDots}</p>
-    </div>
-)}
-
-      {selectedPokemon === null ? (
-        <div className="pokedex-search-row">
-          <input
-            className="pokedex-search"
-            type="text"
-            placeholder="SEARCH POKÉMON..."
-            value={search}
-            onChange={(event) => setSearch(event.target.value)}
-          />
-        </div>
-      ) : (
-        <div className="pokedex-search-row">
-          <button
-            className="pokedex-back"
-            onClick={() => {
-              playClickSound();
-              setSelectedPokemon(null);
+          <div
+            className="pokedex-loading"
+            style={{
+              backgroundImage: `url(${pokedexLoadingBg})`,
             }}
           >
-            BACK
-          </button>
-        </div>
-      )}
+            <div className="loading-pokeball">
+              <div className="loading-pokeball-button"></div>
+            </div>
 
-      {selectedPokemon === null ? (
-        <div className="pokedex-list">
-          {pokemonList
-            .filter(
-              (pokemon) =>
-                pokemon.name.includes(search.toLowerCase()) ||
-                String(pokemon.id).includes(search),
-            )
-            .map((pokemon) => (
-              <div
-                className="pokedex-entry"
-                key={pokemon.name}
-                onClick={() => {
-                  playClickSound();
-                  setSelectedPokemon(pokemon);
-                }}
-              >
-                <div className="pokedex-entry-header">
-                  <span>#{pokemon.id}</span>
+            <p>LOADING POKÉDEX{loadingDots}</p>
+          </div>
+        )}
+        {selectedPokemon === null ? (
+          <div className="pokedex-search-row">
+            <input
+              className="pokedex-search"
+              type="text"
+              placeholder="SEARCH POKÉMON..."
+              value={search}
+              onChange={(event) => setSearch(event.target.value)}
+            />
+          </div>
+        ) : (
+          <div className="pokedex-search-row">
+            <button
+              className="pokedex-back"
+              onClick={() => {
+                playClickSound();
+                setSelectedPokemon(null);
+              }}
+            >
+              BACK
+            </button>
+          </div>
+        )}
+        {selectedPokemon === null ? (
+          <div className="pokedex-list">
+            {pokemonList
+              .filter(
+                (pokemon) =>
+                  pokemon.name.includes(search.toLowerCase()) ||
+                  String(pokemon.id).includes(search),
+              )
+              .map((pokemon) => (
+                <div
+                  className="pokedex-entry"
+                  key={pokemon.name}
+                  onClick={() => {
+                    playClickSound();
+                    setSelectedPokemon(pokemon);
+                  }}
+                >
+                  <div className="pokedex-entry-header">
+                    <span>#{pokemon.id}</span>
 
-                  <span className="pokedex-name">
-                    {pokemon.name}
-                    <span className="caught-ball" aria-label="Caught"></span>
-                  </span>
-                </div>
+                    <span className="pokedex-name">
+                      {pokemon.name}
+                      <span className="caught-ball" aria-label="Caught"></span>
+                    </span>
+                  </div>
 
-                <div className="pokedex-entry-body">
-                  <img src={pokemon.sprites.front_default} alt={pokemon.name} />
+                  <div className="pokedex-entry-body">
+                    <img
+                      src={pokemon.sprites.front_default}
+                      alt={pokemon.name}
+                    />
 
-                  <div className="pokedex-entry-info">
-                    <p className="pokemon-species">{pokemon.species}</p>
+                    <div className="pokedex-entry-info">
+                      <p className="pokemon-species">{pokemon.species}</p>
 
-                    <p className="pokemon-types">
-                      {pokemon.types
-                        .map((type) => formatName(type.type.name))
-                        .join(" / ")}
-                    </p>
+                      <p className="pokemon-types">
+                        {pokemon.types
+                          .map((type) => formatName(type.type.name))
+                          .join(" / ")}
+                      </p>
 
-                    <p>HT: {(pokemon.height / 10).toFixed(1)} m</p>
+                      <p>HT: {(pokemon.height / 10).toFixed(1)} m</p>
 
-                    <p>WT: {(pokemon.weight / 10).toFixed(1)} kg</p>
+                      <p>WT: {(pokemon.weight / 10).toFixed(1)} kg</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-        </div>
-      ) : (
-        <div className="pokedex-details">
-          <div className="pokedex-top">
-            <div className="pokedex-sprite">
-              <img
-                src={selectedPokemon.sprites.front_default}
-                alt={selectedPokemon.name}
-              />
-            </div>
-
-            <div className="pokedex-info">
-              <h2>
-                #{String(selectedPokemon.id).padStart(3, "0")}{" "}
-                {formatName(selectedPokemon.name)}
-              </h2>
-
-              <p>Species: {selectedPokemon.species}</p>
-
-              <p>
-                Type:{" "}
-                {selectedPokemon.types
-                  .map((type) => formatName(type.type.name))
-                  .join(" / ")}
-              </p>
-
-              <p>Height: {(selectedPokemon.height / 10).toFixed(1)} m</p>
-
-              <p>Weight: {(selectedPokemon.weight / 10).toFixed(1)} kg</p>
-            </div>
+              ))}
           </div>
-          <h3>BASE STATS</h3>
+        ) : (
+          <div className="pokedex-details">
+            <div className="pokedex-top">
+              <div className="pokedex-sprite">
+                <img
+                  src={selectedPokemon.sprites.front_default}
+                  alt={selectedPokemon.name}
+                />
+              </div>
 
-          <div className="stats">
-            {selectedPokemon.stats.map((stat) => (
-              <div className="stat-row" key={stat.stat.name}>
-                <span>{stat.stat.name}</span>
+              <div className="pokedex-info">
+                <h2>
+                  #{String(selectedPokemon.id).padStart(3, "0")}{" "}
+                  {formatName(selectedPokemon.name)}
+                </h2>
 
-                <div className="stat-bar">
-                  <div
-                    className={`stat-fill stat-${stat.stat.name}`}
-                    style={{
-                      width: `${(stat.base_stat / 255) * 100}%`,
-                    }}
-                  ></div>
+                <p>Species: {selectedPokemon.species}</p>
+
+                <p>
+                  Type:{" "}
+                  {selectedPokemon.types
+                    .map((type) => formatName(type.type.name))
+                    .join(" / ")}
+                </p>
+
+                <p>Height: {(selectedPokemon.height / 10).toFixed(1)} m</p>
+
+                <p>Weight: {(selectedPokemon.weight / 10).toFixed(1)} kg</p>
+              </div>
+            </div>
+            <h3>BASE STATS</h3>
+
+            <div className="stats">
+              {selectedPokemon.stats.map((stat) => (
+                <div className="stat-row" key={stat.stat.name}>
+                  <span>{stat.stat.name}</span>
+
+                  <div className="stat-bar">
+                    <div
+                      className={`stat-fill stat-${stat.stat.name}`}
+                      style={{
+                        width: `${(stat.base_stat / 255) * 100}%`,
+                      }}
+                    ></div>
+                  </div>
+
+                  <span>{stat.base_stat}</span>
                 </div>
+              ))}
+            </div>
 
-                <span>{stat.base_stat}</span>
-              </div>
-            ))}
+            <h3>ABILITIES</h3>
+
+            <div className="abilities">
+              {selectedPokemon.abilities.map((ability) => (
+                <p key={ability.ability.name}>
+                  {formatName(ability.ability.name)}
+                </p>
+              ))}
+            </div>
+
+            <h3>POKÉDEX ENTRY</h3>
+
+            <p className="pokedex-description">{description}</p>
           </div>
-
-          <h3>ABILITIES</h3>
-
-          <div className="abilities">
-            {selectedPokemon.abilities.map((ability) => (
-              <p key={ability.ability.name}>
-                {formatName(ability.ability.name)}
-              </p>
-            ))}
-          </div>
-
-          <h3>POKÉDEX ENTRY</h3>
-
-          <p className="pokedex-description">{description}</p>
-        </div>
-      )} </div>
+        )}{" "}
+      </div>
     </div>
   );
 }
